@@ -1,6 +1,6 @@
 # NLP-Sentiment-Analysis
 
-A simple example of sentiment analysis using naive_bayes (BernoulliNB) classifier.
+A simple example of sentiment analysis using naive_bayes (BernoulliNB) classifier from SKLearn.
 
 ### Libs
 - SKLearn ([https://www.nltk.org/](https://www.nltk.org/))
