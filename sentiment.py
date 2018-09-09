@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-#import pandas as pd
 import random
 import util
 
@@ -21,7 +20,7 @@ from sklearn.naive_bayes import GaussianNB, BernoulliNB
 # from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis
 
 from nltk.corpus import twitter_samples, stopwords
- 
+
 # class DenseTransformer(TransformerMixin):
 
 #     def transform(self, X, y=None, **fit_params):
@@ -41,7 +40,6 @@ trainingTweets, trainingSentiment, allRows = util.loadDataset('data/trainingdata
 testTweets, testSentiment, testRows = util.loadDataset('data/testdata.csv', 1)
 
 print 'Parsing class...'
-# instead of predicting two categories ('0', and '4') that the algorithm doesn't inherently understand are mutually exclusive, we will explicitly turn this into a single binary classification problem (0 or 1)
 trainingSentiment = util.normalizeClasses(trainingSentiment)
 testSentiment = util.normalizeClasses(testSentiment)
 
@@ -64,12 +62,12 @@ test_X = testTweets
 test_y = testSentiment
 
 vectorizer = CountVectorizer(
-    analyzer="word",
-    ngram_range=(1, 3),
-    stop_words=stopwords.words('english'),
-    #tokenizer=word_tokenize
-    tokenizer=util.negation,
-    preprocessor=util.removeBr
+    analyzer = "word",
+    ngram_range = (1, 3),
+    stop_words = stopwords.words('english'),
+    #tokenizer = word_tokenize
+    tokenizer = util.negation,
+    preprocessor = util.removeBr
  )
 
 classifier = BernoulliNB()
@@ -93,7 +91,7 @@ model = Pipeline([
     ('classifier', classifier)
 ])
 
-print 'Training...' 
+print 'Training...'
 model.fit(train_X, train_y)
 print 'Score:'
 print model.score(test_X, test_y)
@@ -105,7 +103,7 @@ joblib.dump(model, 'model.pkl')
 # model = joblib.load('model.pkl')
 
 print 'Simple test...'
-test = ["I feel like :(", "Nice =)", "I don't like it", "Sad =(", "I hate you!", "Awesome!!!!", "Nothing really"];
+test = ["I feel like :(", "Nice =)", "I don't like it", "Sad =(", "Love it!", "Awesome!!!!", "Nothing really"];
 print test
 for d in model.predict_proba(test):
 	print ":(" if d[0] > d[1] else ":)",

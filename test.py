@@ -4,7 +4,7 @@ print 'Loading model...'
 model = joblib.load('model.pkl')
 
 print 'Simple test...'
-test = ["I feel like mehh...", "Nice =)", "I don't like it", "Sad =(", "I hate you!", "Awesome!!!!", "Nothing really"];
+test = ["I feel like mehh...", "Nice =)", "I don't like it", "Sad =(", "Love it!", "Awesome!!!!", "Nothing really"];
 print test
 for d in model.predict_proba(test):
   print ":(" if d[0] > d[1] else ":)",
